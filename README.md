@@ -123,7 +123,8 @@ python -m http.server 8000
 如果你喜欢这个游戏，可以通过以下方式支持我：
 
 - ⭐ 给这个项目点个Star
-- 💰 [GitHub Sponsors](https://github.com/sponsors/Jieice)
+- 💰 国际赞助：[GitHub Sponsors](https://github.com/sponsors/Jieice)
+- 💖 国内赞助：[爱发电](https://afdian.net/@Jieice)
 - 🎮 [在 itch.io 上赞助](https://jieice.itch.io/stack-tower)
 - 🐛 [报告Bug或建议新功能](https://github.com/Jieice/stack-tower/issues)
 - 🔀 Fork 并改进代码，提交PR
