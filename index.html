@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Stack Tower - Addictive stacking game! How high can you go?">
+    <title>Stack Tower - Stack Blocks as High as You Can!</title>
+
+    <!-- Phaser 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- 加载提示 -->
+    <div id="loading">
+        <div class="loading-content">
+            <h1>🏗️ Stack Tower</h1>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- 游戏容器 -->
+    <div id="game"></div>
+
+    <!-- 游戏配置和工具类 -->
+    <script src="js/utils/Config.js"></script>
+    <script src="js/utils/ScoreManager.js"></script>
+    <script src="js/utils/AudioManager.js"></script>
+
+    <!-- 游戏对象 -->
+    <script src="js/objects/Block.js"></script>
+
+    <!-- 游戏场景 -->
+    <script src="js/scenes/BootScene.js"></script>
+    <script src="js/scenes/MenuScene.js"></script>
+    <script src="js/scenes/HowToPlayScene.js"></script>
+    <script src="js/scenes/GameScene.js"></script>
+    <script src="js/scenes/GameOverScene.js"></script>
+
+    <!-- 主配置 -->
+    <script src="js/main.js"></script>
+
+    <script>
+        // 隐藏加载画面
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                }, 300);
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>

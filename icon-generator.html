@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Tower Icon Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a2e;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+
+        canvas {
+            border: 2px solid #444;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🏗️ Stack Tower Icon Generator</h1>
+    <canvas id="iconCanvas" width="512" height="512"></canvas>
+    <button onclick="downloadIcon()">Download Icon (512x512)</button>
+
+    <script>
+        const canvas = document.getElementById('iconCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawIcon() {
+            // Background gradient
+            const bgGradient = ctx.createRadialGradient(256, 256, 0, 256, 256, 400);
+            bgGradient.addColorStop(0, '#2d3561');
+            bgGradient.addColorStop(1, '#1a1f3a');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, 512, 512);
+
+            // Draw stacked blocks (rainbow colors)
+            const blockHeight = 60;
+            const colors = [
+                '#FF6B6B',  // Red
+                '#FFA06B',  // Orange
+                '#FFE66D',  // Yellow
+                '#4ECDC4',  // Cyan
+                '#45B7D1',  // Blue
+                '#9B5DE5',  // Purple
+                '#F72585'   // Pink
+            ];
+
+            let baseWidth = 280;
+            let offsetX = 0;
+
+            for (let i = 0; i < 7; i++) {
+                const width = baseWidth - (i * 10);
+                const x = 256 + offsetX - width / 2;
+                const y = 420 - (i * blockHeight);
+
+                // Shadow
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                ctx.fillRect(x + 5, y + 5, width, blockHeight);
+
+                // Block gradient
+                const gradient = ctx.createLinearGradient(x, y, x, y + blockHeight);
+                gradient.addColorStop(0, colors[i]);
+                gradient.addColorStop(1, adjustColor(colors[i], -30));
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, width, blockHeight);
+
+                // Highlight
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                ctx.fillRect(x, y, width, 15);
+
+                // Border
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(x, y, width, blockHeight);
+
+                // Slight random offset for variation
+                offsetX += (Math.random() - 0.5) * 15;
+            }
+
+            // Title text
+            ctx.font = 'bold 56px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // Text shadow
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            ctx.fillText('STACK', 256 + 3, 100 + 3);
+            ctx.fillText('TOWER', 256 + 3, 160 + 3);
+
+            // Text gradient
+            const textGradient = ctx.createLinearGradient(0, 80, 0, 180);
+            textGradient.addColorStop(0, '#FFE66D');
+            textGradient.addColorStop(1, '#FFA06B');
+
+            ctx.fillStyle = textGradient;
+            ctx.fillText('STACK', 256, 100);
+            ctx.fillText('TOWER', 256, 160);
+        }
+
+        function adjustColor(color, amount) {
+            const clamp = (val) => Math.min(255, Math.max(0, val));
+            const num = parseInt(color.replace('#', ''), 16);
+            const r = clamp((num >> 16) + amount);
+            const g = clamp(((num >> 8) & 0x00FF) + amount);
+            const b = clamp((num & 0x0000FF) + amount);
+            return `#${(0x1000000 + r * 0x10000 + g * 0x100 + b).toString(16).slice(1)}`;
+        }
+
+        function downloadIcon() {
+            const link = document.createElement('a');
+            link.download = 'stack-tower-icon.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Draw icon on load
+        drawIcon();
+    </script>
+</body>
+
+</html>

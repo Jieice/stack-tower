@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Tower - Cover Image Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .canvas-wrapper {
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .refresh-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .refresh-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .info strong {
+            color: #667eea;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🏗️ Stack Tower - Cover Generator</h1>
+
+        <div class="canvas-wrapper">
+            <canvas id="coverCanvas" width="630" height="500"></canvas>
+        </div>
+
+        <div class="controls">
+            <button class="download-btn" onclick="downloadCover()">
+                📥 Download Cover (630x500)
+            </button>
+            <button class="refresh-btn" onclick="redrawCover()">
+                🔄 Regenerate (Random Colors)
+            </button>
+        </div>
+
+        <div class="info">
+            <strong>使用说明：</strong><br>
+            1. 点击"Regenerate"可以生成不同颜色的方块<br>
+            2. 满意后点击"Download"下载封面图片<br>
+            3. 上传到itch.io作为Cover Image（630x500）
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('coverCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawCover() {
+            // 清空画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 渐变背景
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 添加一些装饰点
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            for (let i = 0; i < 50; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const size = Math.random() * 3 + 1;
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // 绘制堆叠的彩色方块（游戏视觉元素）
+            const blockHeight = 40;
+            const blockWidths = [200, 180, 160, 140, 120];
+            const startY = 320;
+
+            for (let i = 0; i < blockWidths.length; i++) {
+                const width = blockWidths[i];
+                const y = startY - (i * blockHeight);
+                const x = (canvas.width - width) / 2;
+
+                // 方块主体
+                const hue = (i * 60) % 360;
+                ctx.fillStyle = `hsl(${hue}, 70%, 60%)`;
+                ctx.fillRect(x, y, width, blockHeight);
+
+                // 方块高光
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.fillRect(x, y, width, 10);
+
+                // 方块阴影
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+                ctx.fillRect(x, y + blockHeight - 5, width, 5);
+
+                // 方块边框
+                ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(x, y, width, blockHeight);
+            }
+
+            // 标题 - STACK
+            ctx.font = 'bold 90px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // 标题阴影
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillText('STACK', canvas.width / 2 + 3, 80 + 3);
+
+            // 标题主体
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText('STACK', canvas.width / 2, 80);
+
+            // 副标题 - TOWER
+            ctx.font = 'bold 90px Arial';
+
+            // 副标题阴影
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillText('TOWER', canvas.width / 2 + 3, 170 + 3);
+
+            // 副标题主体
+            ctx.fillStyle = '#FFD700';
+            ctx.fillText('TOWER', canvas.width / 2, 170);
+
+            // 底部标语
+            ctx.font = 'bold 24px Arial';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillText('Stack Blocks as High as You Can!', canvas.width / 2 + 2, 430 + 2);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText('Stack Blocks as High as You Can!', canvas.width / 2, 430);
+
+            // 装饰元素 - 小图标
+            ctx.font = '30px Arial';
+            ctx.fillText('🎮', 80, 430);
+            ctx.fillText('🏆', canvas.width - 80, 430);
+        }
+
+        function redrawCover() {
+            drawCover();
+        }
+
+        function downloadCover() {
+            // 创建下载链接
+            const link = document.createElement('a');
+            link.download = 'stack-tower-cover-630x500.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // 初始绘制
+        drawCover();
+    </script>
+</body>
+
+</html>
