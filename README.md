@@ -1,12 +1,12 @@
 # 🏗️ Stack Tower
 
-[![Play on itch.io](https://img.shields.io/badge/Play%20on-itch.io-FA5C5C?style=for-the-badge&logo=itch.io&logoColor=white)](https://YOUR_USERNAME.itch.io/stack-tower)
+[![Play on itch.io](https://img.shields.io/badge/Play%20on-itch.io-FA5C5C?style=for-the-badge&logo=itch.io&logoColor=white)](https://jieice.itch.io/stack-tower)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-GitHub-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/YOUR_USERNAME)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-GitHub-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/Jieice)
 
 一个令人上瘾的开源方块堆叠游戏！看看你能堆多高！
 
-**🎮 [在 itch.io 上立即游玩](https://YOUR_USERNAME.itch.io/stack-tower)**
+**🎮 [在 itch.io 上立即游玩](https://jieice.itch.io/stack-tower)**
 
 ## 🎮 游戏介绍
 
@@ -123,9 +123,9 @@ python -m http.server 8000
 如果你喜欢这个游戏，可以通过以下方式支持我：
 
 - ⭐ 给这个项目点个Star
-- 💰 [GitHub Sponsors](https://github.com/sponsors/YOUR_USERNAME)
-- 🎮 [在 itch.io 上赞助](https://YOUR_USERNAME.itch.io/stack-tower)
-- 🐛 [报告Bug或建议新功能](https://github.com/YOUR_USERNAME/stack-tower/issues)
+- 💰 [GitHub Sponsors](https://github.com/sponsors/Jieice)
+- 🎮 [在 itch.io 上赞助](https://jieice.itch.io/stack-tower)
+- 🐛 [报告Bug或建议新功能](https://github.com/Jieice/stack-tower/issues)
 - 🔀 Fork 并改进代码，提交PR
 
 你的支持是我持续创作的动力！❤️
@@ -197,8 +197,8 @@ const GAME_CONFIG = {
 
 **JieDimension Studio**
 
-- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
-- itch.io: [YOUR_USERNAME](https://YOUR_USERNAME.itch.io)
+- GitHub: [@Jieice](https://github.com/Jieice)
+- itch.io: [jieice](https://jieice.itch.io)
 
 ## 🙏 致谢
 
